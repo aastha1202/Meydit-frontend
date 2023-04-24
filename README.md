@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# Meydit frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a web application where consumers can post tailoring jobs and tailors can view the jobs and send quotation requests.
 
 ## Available Scripts
 
