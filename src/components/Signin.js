@@ -20,16 +20,15 @@ const Signin = () => {
   });
   
   const addressOptions = [
-    { label: "Andheri", value: "Andheri" },
-    { label: "Bandra", value: "Bandra" },
-    { label: "Colaba", value: "Colaba" },
-    { label: "Dadar", value: "Dadar" },
-    { label: "Juhu", value: "Juhu" },
-    { label: "Malad", value: "Malad" },
-    { label: "Powai", value: "Powai" },
-    { label: "Santacruz", value: "Santacruz" },
-    { label: "Vashi", value: "Vashi" },
-    { label: "Worli", value: "Worli" },
+    { label: "New South Wales", value: "New South Wales" },
+    { label: "Victoria", value: "Victoria" },
+    { label: "Queensland", value: "Queensland" },
+    { label: "Western Australia", value: "Western Australia" },
+    { label: "South Australia", value: "South Australia" },
+    { label: "Northern Territory", value: "Northern Territory" },
+    { label: "Tasmania", value: "Tasmania" },
+    { label: "Australian Capital Territory", value: "Australian Capital Territory" },
+    { label: "Other", value: "Other" }
   ];
   
   
