@@ -39,7 +39,20 @@ const Consumer = () => {
       "western",
       "ethnic",
       "blouse",
-      "saree"
+      "saree",
+      "kurta",
+      "sherwani",
+      "lehenga",
+      "jeans",
+      "t-shirt",
+      "jacket",
+      "dress",
+      "skirt",
+      "trousers",
+      "shirt",
+      "coat",
+      "salwar kameez",
+      "anarkali",
     ];
 
     useEffect(() => {
@@ -60,40 +73,26 @@ const Consumer = () => {
           setPreviewSource(reader.result);
         };
       };
-    const cloudName =process.env.CLOUDINARY_CLOUD_NAME
       const handleSubmit = async (e) => {
         e.preventDefault();
-        // const formData = new FormData();
-        // formData.append("file", fileInputState);
-        // formData.append("upload_preset", "anfkfk0y");
+        const formData = new FormData();
+        formData.append("file", fileInputState);
+        formData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
+        formData.append("cloud_name",process.env.REACT_APP_CLOUDINARY_CLOUD_NAME)
 
         // axios.defaults.headers.post['Access-Control-Allow-Headers'] = 'http://localhost:3000/consumer';
+        
+        console.log(process.env.REACT_APP_CLOUDINARY_CLOUD_NAME)
+      const response=  await axios.post(`https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`, formData,{
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          }
+        })
+        console.log('Cloudinary Response:', response.data);
 
-        // await axios.post(`https://api.cloudinary.com/v1_1/didcpmnka/image/upload`, formData,{
-        //   headers: {
-        //     'Content-Type': 'application/json',
-        //   },
-        // })
-        const file = fileInputState;
-        const storagePath = ref(storage,`images/${file.name}`);
-        const uploadTask = uploadBytesResumable(storagePath,file);
-        uploadTask.on(
-          "state_changed",
-          (snapshot) => {
-            // progress function
-            const progress = Math.round(
-              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-            );
-            console.log("Upload is " + progress + "% done");
-          },
-          (error) => {
-            // error function
-            console.log(error);
-          },
-          ()=>{
-            getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-              const imageUrl = downloadURL;
-              setImage(imageUrl);
+        const imageUrl = response.data.secure_url;
+        setImage(imageUrl);
+        console.log(clothImage)
               axios.post("https://meyd-it.onrender.com/jobs",{
                 fname: fname,
                 lname:lname,
@@ -102,7 +101,7 @@ const Consumer = () => {
                 clothing_type:data.clothing_type,
                 description:data.description,
                 budget:data.budget,
-                image:imageUrl,
+                image:clothImage,
                 address:address,
                 user_id:user_id
               })
@@ -113,8 +112,48 @@ const Consumer = () => {
               .catch(err => {
                 console.log(err);
               });
-            });
-          });
+          
+        // const file = fileInputState;
+        // const storagePath = ref(storage,`images/${file.name}`);
+        // const uploadTask = uploadBytesResumable(storagePath,file);
+        // uploadTask.on(
+        //   "state_changed",
+        //   (snapshot) => {
+        //     // progress function
+        //     const progress = Math.round(
+        //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        //     );
+        //     console.log("Upload is " + progress + "% done");
+        //   },
+        //   (error) => {
+        //     // error function
+        //     console.log(error);
+        //   },
+        //   ()=>{
+        //     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+        //       const imageUrl = downloadURL;
+        //       setImage(imageUrl);
+        //       axios.post("https://meyd-it.onrender.com/jobs",{
+        //         fname: fname,
+        //         lname:lname,
+        //         phone:phone,
+        //         email:email,
+        //         clothing_type:data.clothing_type,
+        //         description:data.description,
+        //         budget:data.budget,
+        //         image:imageUrl,
+        //         address:address,
+        //         user_id:user_id
+        //       })
+        //       .then(res=>{
+        //           console.log(res.data);
+        //           alert("You have posted your job");
+        //       })
+        //       .catch(err => {
+        //         console.log(err);
+        //       });
+        //     });
+        //   });
       };
         // .then(res => {
         //   const imageUrl = res.data.url;

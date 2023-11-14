@@ -27,6 +27,8 @@ export const Maker = () => {
 
    const [message, setMessage]=useState("");
    const[toggle,setToggle]= useState(false);
+   const initialCardStates = posts.map(() => false); 
+   const [jobStates,setjobStates]=useState(initialCardStates)
    const labelClass= "block text-gray-700 text-sm font-bold mb-2";
    const inputClass="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
    const userType= localStorage.getItem("userType")
@@ -58,22 +60,36 @@ export const Maker = () => {
 }, [])
 
  const addressOptions = [
-  { label: "New South Wales", value: "New South Wales" },
-  { label: "Victoria", value: "Victoria" },
-  { label: "Queensland", value: "Queensland" },
-  { label: "Western Australia", value: "Western Australia" },
-  { label: "South Australia", value: "South Australia" },
-  { label: "Northern Territory", value: "Northern Territory" },
-  { label: "Tasmania", value: "Tasmania" },
-  { label: "Australian Capital Territory", value: "Australian Capital Territory" },
-  { label: "Other", value: "Other" }
+  { label: "Andheri", value: "Andheri" },
+  { label: "Bandra", value: "Bandra" },
+  { label: "Colaba", value: "Colaba" },
+  { label: "Dadar", value: "Dadar" },
+  { label: "Juhu", value: "Juhu" },
+  { label: "Malad", value: "Malad" },
+  { label: "Powai", value: "Powai" },
+  { label: "Santacruz", value: "Santacruz" },
+  { label: "Vashi", value: "Vashi" },
+  { label: "Worli", value: "Worli" },
 ];
 
 const clothTypes = [
   "western",
   "ethnic",
   "blouse",
-  "saree"
+  "saree",
+  "kurta",
+  "sherwani",
+  "lehenga",
+  "jeans",
+  "t-shirt",
+  "jacket",
+  "dress",
+  "skirt",
+  "trousers",
+  "shirt",
+  "coat",
+  "salwar kameez",
+  "anarkali",
 ];
 
 
@@ -105,6 +121,7 @@ const handleFilter=(e)=>{
     },
   })
   .then(response => {
+    console.log(response.data)
     setPosts(response.data);                    
     console.log(response.data);
   })
@@ -152,8 +169,11 @@ const handleSendMessage=()=>{
 
 }
 
-const handleToggle=()=>{
-  setToggle(!toggle)
+const handleToggle=(index)=>{
+  // setToggle(!toggle)
+  const newCardStates = [...jobStates];
+  newCardStates[index] = !newCardStates[index];
+  setjobStates(newCardStates);
 }
 
 
@@ -184,14 +204,14 @@ const handleToggle=()=>{
    </div>
     <div className="flex flex-row flex-wrap items-center justify-center" >
     {
-      posts.map((post)=>{
+      posts.map((post,index)=>{
         return(
-          <Card className=" lg:w-1/3 m-10 bg-white">
-      <CardHeader color="blue" className="relative h-56">
+          <Card className=" lg:w-1/3 m-10  ">
+      <CardHeader color="white" className="relative h-56">
         <img
           src={post.image}
           alt="img-blur-shadow"
-          className="h-full w-full"
+          className="h-full m-auto  "
         />
       </CardHeader>
       <CardBody className="text-center">
@@ -203,14 +223,15 @@ const handleToggle=()=>{
          : {post.description}
         </Typography>
       </CardBody>
-      <div className='flex flex-row-reverse mx-4'><RiArrowDropDownLine className='text-40' onClick={handleToggle}/></div>
-    { toggle &&  <CardFooter divider className="flex items-center justify-between py-3">
+      <div className='flex flex-row-reverse mx-4 cursor-pointer '><RiArrowDropDownLine className='text-40' onClick={()=>handleToggle(index)}/></div>
+    { jobStates[index] &&  <CardFooter divider className="flex items-center justify-between py-3">
         <Typography  className="flex flex-col ">
         <span> <span className='font-semibold'> Name </span>: {post.fname} {post.lname}</span>
         <span> <span className='font-semibold'> Phone Number</span>: {post.phone}</span>
        <span>  <span className='font-semibold'>Email </span> :{post.email}</span>
        <span> <span className='font-semibold'>Budget</span> :{post.budget}</span>
-       <span> <span className='font-semibold'>Quotation Count</span> :{post.quotation_count}</span></Typography>
+       {/* <span> <span className='font-semibold'>Quotation Count</span> :{post.quotation_count}</span> */}
+       </Typography>
         <Button className='bg-primary  text-white  w-32 py-2 px-1 rounded-lg ' onClick={()=>handleQuotation(post.email,post.fname,post.id,post.user_id)}>Send Quotation</Button>
 
       </CardFooter>}
@@ -230,7 +251,7 @@ const handleToggle=()=>{
   <div className='flex justify-center '>
   <form className='absolute  ' onSubmit={handleSendMessage}>
     <label for="message" className={labelClass}>Message:</label>
-    <textarea  id="message" name="message" className={`resize-none ${inputClass}`} defaultValue="Budeget is" required onChange={(e)=>handleMessage(e)} />
+    <textarea  id="message" name="message" className={`resize-none ${inputClass}`} defaultValue="Budget is" required onChange={(e)=>handleMessage(e)} />
     <label for="price" className={labelClass}>Price:</label>
     <input id="price" name="price" className={inputClass} type='number' required onChange={(e)=>SetPrice(e.target.value)} />
 

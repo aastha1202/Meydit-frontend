@@ -46,6 +46,7 @@ const MakerQuotation = () => {
         <Nav/>
         <h1 className='text-center font-lato text-4xl my-4 uppercase'> Your quotation requests </h1>
         {quotation.map((quotation)=>{
+          console.log("price"+ quotation.price)
     const customer = posts.find((p) => p.id === quotation.customer_id);
           return (
             <div key={quotation.id}>

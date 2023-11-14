@@ -21,7 +21,8 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://meyd-it.onrender.com/login', { email: auth.email, password: auth.password }, {
+      // https://meyd-it.onrender.com/login
+      const response = await axios.post(' https://meyd-it.onrender.com/login', { email: auth.email, password: auth.password }, {
         headers: {
           Accept: 'application/json'
         }

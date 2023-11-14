@@ -19,7 +19,7 @@ const Quotation = () => {
         })
         .then(response => {                  
           setQuotation(response.data) 
-          // console.log(quotation);
+          console.log(quotation);
          
           })
           .catch(error => {
