@@ -12,7 +12,7 @@ const Quotation = () => {
     
     const user_id= localStorage.getItem("user_id")
     useEffect(() => {
-        axios.get("https://meydit.onrender.com/quotations",{
+        axios.get("https://meyd-it.onrender.com/quotations",{
             params: {
               customer_id:user_id
               },
@@ -31,7 +31,7 @@ const Quotation = () => {
     }, [])
     useEffect(() => {
       const makerIds= quotation.map(q=> q.maker_id);
-      axios.get("https://meydit.onrender.com/maker",{
+      axios.get("https://meyd-it.onrender.com/maker",{
         params:{
             maker_id:makerIds.join(','),
         }
@@ -48,7 +48,7 @@ const Quotation = () => {
     }, [quotation]);
 
   const handleStatus=(quotation_id, status)=>{
-     axios.put(`https://meydit.onrender.com/quotations/${quotation_id}/${status}`)
+     axios.put(`https://meyd-it.onrender.com/quotations/${quotation_id}/${status}`)
       .then(response => {
         console.log(response.data);
         setQuotation(quotation.map(q => q.id === quotation_id ? { ...q, status } : q));

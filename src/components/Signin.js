@@ -62,7 +62,7 @@ const Signin = () => {
   const handleSubmit=(e)=>{
     e.preventDefault();
     axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*';
-     axios.post("https://meydit.onrender.com/user",{
+     axios.post("https://meyd-it.onrender.com/user",{
       fname: profileData.fname,
       lname:profileData.lname,
       userType:profileData.userType,

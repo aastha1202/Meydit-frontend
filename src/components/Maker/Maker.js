@@ -34,7 +34,7 @@ export const Maker = () => {
    const userType= localStorage.getItem("userType")
   const makerId= localStorage.getItem("user_id");
    useEffect(() => {
-    axios.get("https://meydit.onrender.com/jobs")
+    axios.get("https://meyd-it.onrender.com/jobs")
    .then(res=>{
       console.log(res.data);
       setPosts(res.data)
@@ -113,7 +113,7 @@ const clothTypes = [
 
 const handleFilter=(e)=>{
   e.preventDefault();
- axios.get("https://meydit.onrender.com/jobs/filter", {
+ axios.get("https://meyd-it.onrender.com/jobs/filter", {
     params: {
       address: selectedLocation,
       clothType: clothingType
@@ -141,7 +141,7 @@ const handleClothingTypeChange=(e)=>{
 
 const handleSendMessage=()=>{
   
-  axios.post('https://meydit.onrender.com/quotations', {
+  axios.post('https://meyd-it.onrender.com/quotations', {
     jobId: jobId,
     customerId: user_id,
     makerId:makerId,
@@ -151,7 +151,7 @@ const handleSendMessage=()=>{
   .then(response => {
                       
     console.log(response.data);
-    axios.put(`https://meydit.onrender.com/jobs/${jobId}`, {
+    axios.put(`https://meyd-it.onrender.com/jobs/${jobId}`, {
       quotation_count: 1,
     })
       .then(response => {

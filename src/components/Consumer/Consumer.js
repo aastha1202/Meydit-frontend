@@ -93,7 +93,7 @@ const Consumer = () => {
         const imageUrl = response.data.secure_url;
         setImage(imageUrl);
         console.log(clothImage)
-              axios.post("https://meydit.onrender.com/jobs",{
+              axios.post("https://meyd-it.onrender.com/jobs",{
                 fname: fname,
                 lname:lname,
                 phone:phone,
