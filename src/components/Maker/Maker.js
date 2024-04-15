@@ -139,8 +139,8 @@ const handleClothingTypeChange=(e)=>{
   console.log(clothingType)
 }
 
-const handleSendMessage=()=>{
-  
+const handleSendMessage=(e)=>{
+  e.preventDefault(); 
   axios.post('https://meyd-it.onrender.com/quotations', {
     jobId: jobId,
     customerId: user_id,
