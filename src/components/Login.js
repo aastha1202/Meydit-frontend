@@ -22,7 +22,7 @@ const Login = () => {
     e.preventDefault();
     try {
       // https://meyd-it.onrender.com/login
-      const response = await axios.post(' https://meyd-it.onrender.com/login', { email: auth.email, password: auth.password }, {
+      const response = await axios.post('https://meydit.onrender.com/login', { email: auth.email, password: auth.password }, {
         headers: {
           Accept: 'application/json'
         }

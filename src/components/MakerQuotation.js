@@ -9,7 +9,7 @@ const MakerQuotation = () => {
     const [posts, setPosts]= useState([])
     const user_id= localStorage.getItem("user_id")
     useEffect(() => {
-        axios.get(`https://meyd-it.onrender.com/maker/quotations/${user_id}`)
+        axios.get(`https://meydit.onrender.com/maker/quotations/${user_id}`)
         .then(response => {                  
           console.log(response.data);
           setQuotation(response.data)
@@ -25,7 +25,7 @@ const MakerQuotation = () => {
     }, [])
     useEffect(() => {
         const makerIds = quotation.length > 0 ? quotation.map(q => q.customer_id) : [];
-        axios.get("https://meyd-it.onrender.com/maker",{
+        axios.get("https://meydit.onrender.com/maker",{
           params:{
               maker_id:makerIds.join(','),
           }
